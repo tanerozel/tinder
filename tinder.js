@@ -1,7 +1,8 @@
 
 
 var tinderToken = localStorage.getItem("TinderWeb/APIToken");
-var primeAppsToken ="Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6IkY5QjA2M0IwRENENTk5OTJDNjdEMzIzOTlFNUY1MjZERTg4RUQzREMiLCJ0eXAiOiJKV1QiLCJ4NXQiOiItYkJqc056Vm1aTEdmVEk1bmw5U2JlaU8wOXcifQ.eyJuYmYiOjE1NjcyNDgxMDQsImV4cCI6MTU2ODExMjEwNCwiaXNzIjoiaHR0cHM6Ly9hdXRoLXByZXZpZXcucHJpbWVhcHBzLmlvIiwiYXVkIjpbImh0dHBzOi8vYXV0aC1wcmV2aWV3LnByaW1lYXBwcy5pby9yZXNvdXJjZXMiLCJhcGkxIl0sImNsaWVudF9pZCI6InByaW1lYXBwc19wcmV2aWV3Iiwic3ViIjoiN2I2ZjMyYjUtMTNhNy00ODU4LWE3MzAtYWJkMWMyZWZhMmUzIiwiYXV0aF90aW1lIjoxNTY3MjQ4MTAzLCJpZHAiOiJsb2NhbCIsImVtYWlsIjoidGFuZXJvemVsQHRpbmRlci5jb20iLCJlbWFpbF9jb25maXJtZWQiOiJGYWxzZSIsImV4dGVybmFsX2xvZ2luIjoiZmFsc2UiLCJzY29wZSI6WyJvcGVuaWQiLCJlbWFpbCIsInByb2ZpbGUiLCJhcGkxIl0sImFtciI6WyJwd2QiXX0.hoxgCUdgpNEH3iFpp28dKyRH-RGSf-45Q2PoTfcRcdDc909VMa_DIh8N3wAoztmR7b32Buwq0D5V7n663bzAEbxRiCARp3bavROcuM0npRxETGt7zqF6c-pFO_w8yjSmfYBYgtPCMqMrYUWoRn1V3dDwzD3NstfJo88SmIIhKla0BQOYPQ9vsMWFNwVvUab5fpmTy5Ksirh67LScxBYBtHLdrwOmG6SDQ0HR4-StHFlD3sWVycPnXXfNfPmrmqsB-3ApZ396iu3-1fow-6_usX_d6H7kN-oe8IGeU3V9fs5rHqCnnjWe5WpSsGtUPxLqBb9eLMY5oUDI7sSdeYsTcw";
+var primeAppsToken ="Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6IkY5QjA2M0IwRENENTk5OTJDNjdEMzIzOTlFNUY1MjZERTg4RUQzREMiLCJ0eXAiOiJKV1QiLCJ4NXQiOiItYkJqc056Vm1aTEdmVEk1bmw5U2JlaU8wOXcifQ.eyJuYmYiOjE1Njc1MjAzMjUsImV4cCI6MTU2ODM4NDMyNSwiaXNzIjoiaHR0cHM6Ly9hdXRoLXByZXZpZXcucHJpbWVhcHBzLmlvIiwiYXVkIjpbImh0dHBzOi8vYXV0aC1wcmV2aWV3LnByaW1lYXBwcy5pby9yZXNvdXJjZXMiLCJhcGkxIl0sImNsaWVudF9pZCI6InByaW1lYXBwc19wcmV2aWV3Iiwic3ViIjoiN2I2ZjMyYjUtMTNhNy00ODU4LWE3MzAtYWJkMWMyZWZhMmUzIiwiYXV0aF90aW1lIjoxNTY3NTIwMzI0LCJpZHAiOiJsb2NhbCIsImVtYWlsIjoidGFuZXJvemVsQHRpbmRlci5jb20iLCJlbWFpbF9jb25maXJtZWQiOiJGYWxzZSIsImV4dGVybmFsX2xvZ2luIjoiZmFsc2UiLCJzY29wZSI6WyJvcGVuaWQiLCJlbWFpbCIsInByb2ZpbGUiLCJhcGkxIl0sImFtciI6WyJwd2QiXX0.mTegiZkvgmOmlkOGUeA_UUmnhqejSZ5Ym49cHejOzCH2LQRnMHmsOeDcXYxlcc8e7IqpaT2bMV0POThLIaO68zQowqktVCg_o0SzcXP_x_j3Y0W8AMHEhqc6ccAB23lu1tl-TmHTvuvP5e7d3d1AQY_dnWpMnlPbB_Kp2upkgOpIH2xiq-ob9CTBk9Fu3JryB9AbaK1G03ijWpl7F_Mfw6J1r03F-er3c5a7Q5UzYLRQ6AU22mkaJIuwzhNY4hM0yevwBirQ51Kdeaig-P-QfG8ncmnig3AkYrA-6o9_PvfgyYjIy6SR7A825c-iN8W6xLV1Pic1C8DKNvmjb9Pr7w";
+ 
 var tinderRequestData = {
   "headers": {
     "accept": "application/json",
@@ -48,7 +49,7 @@ var tinder = {
               "isim": user.name,
               "kullanici_tinder_id": user._id,
               "bio": user.bio,
-              "is": user.jobs.length > 0 ? user.jobs[0].name : "",
+              "is": user.jobs.length > 0 ? user.jobs[0].title.name : "",
               "dogum_tarihi": user.birth_date,
               "resim": user.photos[0].url,
               "okul": user.schools.length > 0 ? user.schools[0].name : "",
