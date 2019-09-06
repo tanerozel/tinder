@@ -1,5 +1,6 @@
 
-
+var totalAdd ,totalFaild,totalLike = 0 ;
+ 
 var tinderToken = localStorage.getItem("TinderWeb/APIToken");
 var primeAppsToken ="Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6IkY5QjA2M0IwRENENTk5OTJDNjdEMzIzOTlFNUY1MjZERTg4RUQzREMiLCJ0eXAiOiJKV1QiLCJ4NXQiOiItYkJqc056Vm1aTEdmVEk1bmw5U2JlaU8wOXcifQ.eyJuYmYiOjE1Njc3MTk0MTQsImV4cCI6MTU2ODU4MzQxNCwiaXNzIjoiaHR0cHM6Ly9hdXRoLXByZXZpZXcucHJpbWVhcHBzLmlvIiwiYXVkIjpbImh0dHBzOi8vYXV0aC1wcmV2aWV3LnByaW1lYXBwcy5pby9yZXNvdXJjZXMiLCJhcGkxIl0sImNsaWVudF9pZCI6InByaW1lYXBwc19wcmV2aWV3Iiwic3ViIjoiN2I2ZjMyYjUtMTNhNy00ODU4LWE3MzAtYWJkMWMyZWZhMmUzIiwiYXV0aF90aW1lIjoxNTY3NzE5NDE0LCJpZHAiOiJsb2NhbCIsImVtYWlsIjoidGFuZXJvemVsQHRpbmRlci5jb20iLCJlbWFpbF9jb25maXJtZWQiOiJGYWxzZSIsImV4dGVybmFsX2xvZ2luIjoiZmFsc2UiLCJzY29wZSI6WyJvcGVuaWQiLCJlbWFpbCIsInByb2ZpbGUiLCJhcGkxIl0sImFtciI6WyJwd2QiXX0.b1B9MaQksttM4QYG4H-DMd6Ggjn_Zt-BVvTff9uqzyIhsZbELDoDnGBPITAj5Amvt3Qp1XsWpadUGqYZ61FBvPMzhJ-i_X0JThRvIKVZYn8dKtSX5HAjWL4KuVE4XwGuN43yaw_vX6ilacso1jbaBkqgCBiWZDjPlTUTi94O65POnNquP5I2IQcfRScHwNxKch3tfki8GJy8n8I8nVDN8H63urLhYoGvpJ4FDTSX3JJ3WYr65i3EkuHylSGMs5uYL9Xm2Ri66_U_YfSOOPM6IU9MDmzixScqEHwCDwZ0Ad3AgwTxnqOXWY7gH3wc7TKS9Qg146mhT1_YQ3cUx7bLSg";
  
@@ -85,7 +86,7 @@ var tinder = {
 
   },
   addUserPrimeApps: function (requestData, tinderId) {
-    console.log(requestData);
+ 
     var dta = Object.assign({}, primeAppsRequestData)
     var filter = {
       "fields": [
@@ -109,14 +110,18 @@ var tinder = {
       response1.json().then((result1) => {
 
         if (result1[0]) {
+          ++totalFaild;
           console.log(tinderId + "EKLENMEDİ");
+          console.log('%c'+totalFaild+' kişi ', 'background: #222; color: #fd5068');
         } else {
           fetch(this.config.primeAppsApiUrl + "/record/create/kullanicilar?timezone_offset=180", requestData).then((response) => {
 
             response.json().then((result) => {
-              console.log(result);
-              console.log(tinderId + '%c EKLENDİ ', 'background: #222; color: #bada55');
-
+              ++totalAdd;
+              console.table(dta.body);
+              console.log('%c EKLENDİ ', 'background: #222; color: #bada55');
+              console.log('%c'+totalAdd+' kişi ', 'background: #222; color: #28a745');
+              this.userLikeTinder(tinderId);
             })
 
           });
@@ -126,10 +131,25 @@ var tinder = {
 
     });
 
+  },
+  userLikeTinder:function(tinderId){
+    if(!tinderId){
+      console.log("tinderId bulunamadı");
+      return false;
+    }
+     
+    fetch("https://api.gotinder.com/like/"+tinderId+"?locale=tr",tinderRequestData).then((response) => {
+      response.json().then((result) => {
+         ++totalLike;
+          console.log(result);
+          console.log('%c'+totalLike+' kişi beğenildi ', 'background: #222; color: #28a745');
+      });
+
+    })
   }
 
 }
-//tinder.getTinderUsers(tinderRequestData);
+ //tinder.getTinderUsers(tinderRequestData);
 
 setInterval(function () { tinder.getTinderUsers(tinderRequestData); }, 10000);
 
